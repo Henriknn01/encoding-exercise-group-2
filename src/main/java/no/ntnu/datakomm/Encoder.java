@@ -1,5 +1,12 @@
 package no.ntnu.datakomm;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 /**
  * The encoder for exercise in IDATA2304. Your task is to implement the missing functions according to the protocol.
  */
@@ -38,6 +45,7 @@ public class Encoder {
      * If the decoded symbols is not in the allowed character set, an exception must be thrown.
      * 5) Concatenate the individual characters together to form a message
      */
+    private static final Charset UTF_8 = StandardCharsets.UTF_8;
 
     /**
      * A dummy help-printer. You should not run this method. Run unit tests instead!
@@ -50,6 +58,13 @@ public class Encoder {
         System.out.println("right click on the src/test/java and choose Run 'All tests'");
         // You can use this method for some experimentation, if needed - run som encoding and decoding tests
         // Better yet - create your own unit tests (or run those provided)
+        String testString = "test";
+        String ecodedMessage = encode(testString);
+        String decodedMessage = decode(ecodedMessage);
+
+        System.out.println("original= " + testString);
+        System.out.println("ecoded= " + ecodedMessage);
+        System.out.println("decoded= " + decodedMessage);
     }
 
     /**
@@ -64,8 +79,17 @@ public class Encoder {
      * @throws IllegalArgumentException If the message contains an illegal character (for example, Å, -, [, etc)
      */
     public static String encode(String message) throws IllegalArgumentException {
-        // TODO - implement this function
-        throw new UnsupportedOperationException("Feature not implemented");
+        byte[] bytes = message.getBytes(UTF_8);
+        StringBuilder binaryMessage = new StringBuilder();
+        for(byte a: bytes){
+            int byteVal = a;
+            for (int i = 0; i < 8; i++) {
+                binaryMessage.append((byteVal & 128) == 0 ? 0 : 1);
+                byteVal <<= 1;
+            }
+            binaryMessage.append(" ");
+        }
+        return binaryMessage.toString();
     }
 
     /**
@@ -85,7 +109,9 @@ public class Encoder {
      * @throws IllegalArgumentException If the format for binaryString is invalid
      */
     public static String decode(String binaryString) throws IllegalArgumentException {
-        // TODO - implement this function
-        throw new UnsupportedOperationException("Feature not implemented");
+        return Arrays.stream(binaryString.split(" "))
+            .map(binary -> Integer.parseInt(binary, 2))
+            .map(Character::toString)
+            .collect(Collectors.joining());
     }
 }
