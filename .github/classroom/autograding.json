@@ -1,0 +1,174 @@
+{
+  "tests": [
+    {
+      "name": "Encode null",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testNullEncode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Encode empty string",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testEmptyEncode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Decode null",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testNullDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Decode empty string",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testEmptyDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Encode invalid input",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testInvalidInputEncode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Decode a single bit",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testInvalidSingleBitDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Decode block with invalid size",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testInvalidBitBlockLengthDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Decode block with invalid bit-values",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testInvalidBitValueDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Simple lowercase char encode",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Simple uppercase char encode",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testUppercaseEncode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Uppercase and lowercase encode",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testUpperLowerEncode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Encode all allowed chars",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testAllAllowedEncode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 30
+    },
+    {
+      "name": "Decode a message with an invalid character",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testInvalidCharacterDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Decode uppercase and lowercase characters",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testUpperLowerDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Decode all allowed characters",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testAllAllowedDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 30
+    },
+    {
+      "name": "Decode bit blocks with invalid separators",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testInvalidSeparatorDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Decode bit blocks with invalid number of bits",
+      "setup": "",
+      "run": "mvn test -Dtest=\"TestEncoder#testInvalidBitCountDecode\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    }
+  ]
+}
