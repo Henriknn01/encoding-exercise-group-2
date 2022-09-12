@@ -3,8 +3,8 @@ package no.ntnu.datakomm;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -20,7 +20,7 @@ public class Encoder {
      *   - lowercase letters a-z
      *   - uppercase letters A-Z
      *   - digits 0-9
-     *   - space ' '
+     *   - space '
      *   - comma ','
      *   - period '.'
      *   - exclamation mark '!'
@@ -58,7 +58,7 @@ public class Encoder {
         System.out.println("right click on the src/test/java and choose Run 'All tests'");
         // You can use this method for some experimentation, if needed - run som encoding and decoding tests
         // Better yet - create your own unit tests (or run those provided)
-        String testString = "test";
+        String testString = "This, is a test 19!.";
         String ecodedMessage = encode(testString);
         String decodedMessage = decode(ecodedMessage);
 
@@ -79,6 +79,14 @@ public class Encoder {
      * @throws IllegalArgumentException If the message contains an illegal character (for example, Å, -, [, etc)
      */
     public static String encode(String message) throws IllegalArgumentException {
+        if (message == null || message.isEmpty()) {
+            return null;
+        }
+        Pattern pattern = Pattern.compile("([^a-zA-Z0-9,.! ])", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(message);
+        if (matcher.find()) {
+            throw new IllegalArgumentException("Illegal character found!");
+        }
         byte[] bytes = message.getBytes(UTF_8);
         StringBuilder binaryMessage = new StringBuilder();
         for(byte a: bytes){
@@ -89,6 +97,7 @@ public class Encoder {
             }
             binaryMessage.append(" ");
         }
+        binaryMessage.delete(binaryMessage.length()-1, binaryMessage.length());
         return binaryMessage.toString();
     }
 
@@ -109,9 +118,25 @@ public class Encoder {
      * @throws IllegalArgumentException If the format for binaryString is invalid
      */
     public static String decode(String binaryString) throws IllegalArgumentException {
-        return Arrays.stream(binaryString.split(" "))
+        if (binaryString == null || binaryString.isEmpty()) {
+            return null;
+        }
+        Pattern pattern = Pattern.compile("([^0-1 ])", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(binaryString);
+        if (matcher.find()) {
+            throw new IllegalArgumentException("Illegal character found!");
+        }
+        String result = Arrays.stream(binaryString.split(" "))
             .map(binary -> Integer.parseInt(binary, 2))
             .map(Character::toString)
             .collect(Collectors.joining());
+
+        Pattern patternTwo = Pattern.compile("([^a-zA-Z0-9,.! ])", Pattern.CASE_INSENSITIVE);
+        Matcher matcherTwo = patternTwo.matcher(result);
+        if (matcherTwo.find()) {
+            throw new IllegalArgumentException("Illegal character found!");
+        }
+
+        return result;
     }
 }
